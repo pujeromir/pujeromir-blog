@@ -1,5 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to pujeromir's blog
 ---
 
 This is a blank Quartz installation.
