@@ -77,6 +77,8 @@ ls
 然后解压到该目录  
 ```
 tar xpvf stage3{TAB} --xattrs-include='*.*' --numeric-owner  
+#删除stage3文件  
+rm stage3{TAB}  
 ```
 然后我们需要根据自己的硬件去做编译优化  
 这里需要根据你的cpu信息优化编译过程，利用多核处理器的优势  
@@ -230,7 +232,7 @@ passwd username
 #安装sudo以使用visudo  
 emerge --ask app-admin/sudo  
 #使用visudo  
-EDITOR=vim visudo  
+visudo  
 ```
 向下翻找找到Uncomment to allow members...  
 删掉下面的注释  
@@ -242,7 +244,7 @@ EDITOR=vim visudo
 ### 安装grub  
 ```
 emerge --ask sys-boot/grub  
-grub-install --efi-directory=/boot/efi  
+grub-install --removable  
 grub-mkconfig -o /boot/grub/grub.cfg  
 ```
 
@@ -266,4 +268,3 @@ umount -R /mnt/gentoo
 ```
 reboot  
 ```
-
