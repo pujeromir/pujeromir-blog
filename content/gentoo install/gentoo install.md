@@ -1,11 +1,10 @@
-# Gentoo linux事实上并不难安装  
-## 只需要以下几步  
-1. 下载iso文件
-2. [分区](##分区)  
-3. [挂载分区](##挂载分区)  
-4. 进行安装  
-5. 进入chroot  
-6. 重启  
+# Gentoo linux事实上并不难安装    
+1. [[#下载iso文件]]  
+2. [[#分区]]  
+3. [[#挂载分区]]  
+4. [[#安装基本系统]]  
+5. [[#进入chroot进一步配置]]  
+6. [[#重启进入系统]]  
 
 ## 下载iso文件
 请使用ventory的u盘装载iso文件  
@@ -194,7 +193,14 @@ vim /etc/fstab
 ```
 #修改*BAKA*为你想设置的设备名字  
 hostnamectl hostname BAKA  
+
+#然后修改/etc/hosts
+vim /etc/hosts
+#同样修改*BAKA*
+127.0.0.1 localhost BAKA
+::1       localhost BAKA
 ```
+
 ### 使用networkmanager  
 NetworkManager是很全能很好用的一个网络工具，如果要日用的话建议使用  
 ```
