@@ -158,4 +158,50 @@ gentoo基础系统是不会预装有带有太多字体的
 图标包  
 - media-fonts/nerd-fonts  
 - media-fonts/fontawesome  
-以上是两个比较通用的图标包，其中*nerd-fonts*需要**guru**overlay，在gentoo安装这一章节中已经添加过  
+以上是两个比较通用的图标包，其中*nerd-fonts*需要**guru** overlay，在gentoo安装这一章节中已经添加过  
+不过我们在安装nerd-fonts之前需要在*/etc/portage/package.use/nerd-fonts*写入  
+```
+media-fonts/nerd-fonts hack noto  
+```
+> 注意千万不要装太多中文字体，noto-cjk和noto已经足够了，否则可能会覆盖图标包,~~铸币博主在编写字体这一节的时候因为大量装中文字体包导致图标被覆盖苦恼很久~~  
+
+我给你说，JetBrainsMono Nerd Font是对的  
+这里强烈建议将nerd-fonts作为最高顺序字体使用，非常舒服  
+```
+#在home目录下创建fontconfig文件夹  
+mkdir -p ~/.config/fontconfig  
+
+#创建文件并写入  
+nvim ~/.config/fontconfig/fonts.conf  
+```
+```
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Hack Nerd Font</family>
+      <family>JetBrainsMono Nerd Font</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Hack Nerd Font</family>
+      <family>sans-serif</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Hack Nerd Font</family>
+      <family>serif</family>
+    </prefer>
+  </alias>
+</fontconfig>
+```
+然后更新缓存  
+```
+fc-cache -fv  
+```
