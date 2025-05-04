@@ -18,7 +18,7 @@ sudo emerge --ask firefox
 sudo emerge --ask google-chrome  
 ```
 我个人不推荐用edge（有很多bug）  
-也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久~~铸币博主上次编译七小时~~  
+也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久,~~铸币博主上次编译七小时~~  
 
 
 ## 软件包查找工具  
@@ -147,17 +147,15 @@ gentoo基础系统是不会预装有带有太多字体的
 所以需要我们手动安装常用的字体  
 这里有我个人推荐安装的字体  
 
-1. 中文  
 - media-fonts/noto-cjk：Google的中日韩字符，支持简繁体，字体风格多样（包括粗体、斜体变体）  
-- media-fonts/wqy-microhei：文泉驿微米黑  
-- media-fonts/wqy-zenhei：文泉驿正黑字体，覆盖简繁中文字体，适合正文和显示，支持 UTF-8  
-- media-fonts/source-han-sans：Adobe 思源黑体，高质量开源字体  
-- media-fonts/arphicfonts：文鼎字体，包含宋体、黑体等经典中文字体，支持中文编码  
-
-2. 其他语言
 - media-fonts/corefonts：微软核心字体，包括 Arial、Times New Roman、Comic Sans 等，含斜体变体  
 - media-fonts/dejavu：DejaVu 字体，扩展自 Vera 字体，支持多种语言，包含 Sans、Serif 和 Mono 的斜体变体  
 - media-fonts/freefont：GNU FreeFont，包含 FreeSerif 和 FreeScript，适合花哨排版  
 - media-fonts/noto：Google的其他语言字体包，包括藏文、泰文、蒙古文、彝文等目标是覆盖所有 Unicode 字符（“No Tofu”，避免显示方框字符）  
 - media-fonts/unifont：GNU Unifont，覆盖几乎所有 Unicode 字符，适合需要广泛字符支持的场景  
 - media-fonts/sil-padauk：支持缅甸文，也适用于部分东南亚小众语言  
+
+图标包  
+- media-fonts/nerd-fonts  
+- media-fonts/fontawesome  
+以上是两个比较通用的图标包，其中*nerd-fonts*需要**guru**overlay，在gentoo安装这一章节中已经添加过  
