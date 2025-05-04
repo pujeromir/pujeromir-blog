@@ -147,14 +147,14 @@ gentoo基础系统是不会预装有带有太多字体的
 所以需要我们手动安装常用的字体  
 这里有我个人推荐安装的字体  
 
-#中文  
+1. 中文  
 - media-fonts/noto-cjk：Google的中日韩字符，支持简繁体，字体风格多样（包括粗体、斜体变体）  
 - media-fonts/wqy-microhei：文泉驿微米黑  
 - media-fonts/wqy-zenhei：文泉驿正黑字体，覆盖简繁中文字体，适合正文和显示，支持 UTF-8  
 - media-fonts/source-han-sans：Adobe 思源黑体，高质量开源字体  
 - media-fonts/arphicfonts：文鼎字体，包含宋体、黑体等经典中文字体，支持中文编码  
 
-#其他语言
+2. 其他语言
 - media-fonts/corefonts：微软核心字体，包括 Arial、Times New Roman、Comic Sans 等，含斜体变体  
 - media-fonts/dejavu：DejaVu 字体，扩展自 Vera 字体，支持多种语言，包含 Sans、Serif 和 Mono 的斜体变体  
 - media-fonts/freefont：GNU FreeFont，包含 FreeSerif 和 FreeScript，适合花哨排版  
