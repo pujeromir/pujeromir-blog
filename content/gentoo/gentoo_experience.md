@@ -1,10 +1,10 @@
-# 这里有一些使用gentoo linux时的常用软件或者教程  
+# 这里有一些使用gentoo linux的使用体验  
+
 1. [[#浏览器]]  
-
-
-
-
-
+2. [[#软件包查找工具]]  
+3. [[#关于内核]]  
+4. [[#关于游戏]]  
+5. [[#字体]]
 
 
 ## 浏览器  
@@ -13,8 +13,151 @@
 *www-client/firefox*  
 ```
 sudo emerge --ask firefox  
+
 #或者  
 sudo emerge --ask google-chrome  
 ```
 我个人不推荐用edge（有很多bug）  
-也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久~~我有点铸币上次编译七小时~~  
+也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久~~铸币博主上次编译七小时~~  
+
+
+## 软件包查找工具  
+*app-portage/eix*是gentoo linux使用必备工具之一  
+此工具可以查找目前你拥有所有repository的所有软件包  
+首先需要安装eix并且同步本地仓库  
+```
+sudo emerge --ask eix  
+
+eix-update  
+````
+此工具很容易使用  
+例如查找mpv播放器  
+```
+eix mpv  
+```
+此外还有一个专门用来查询的网站，甚至可以查看下载某软件包的ebuild  
+[Gentoo Portage Overlay](https://gpo.zugaina.org)  
+
+
+## 关于内核
+
+### dist内核  
+在gentoo安装中提到我使用的内核是*xanmod-kernel*  
+这种内核后缀代表的是可被portage管理的预编译内核，这种内核会在emerge的时候自动编译安装，同时带有通用的内核配置，这种内核在/usr/src/linux下是不能直接修改配置的（无效）  
+如想修改配置文件，则需要开启savedconfig的use并在/etc/portage/savedconfig/sys-kernel下将你的内核.config文件改为你的**内核包名*后重新编译即可  
+例如我现在在用的xanmod-kernel内核  
+```
+#定位到内核目录  
+cd /usr/src/linux  
+
+#修改内核.config  
+make menuconfig  
+
+#修改完成后复制到  
+cp .config /etc/portage/savedconfig/syskernel/xanmod-kernel  
+
+#重新编译  
+emerge xanmod-kernel  
+```
+
+
+### 源码内核  
+源码内核一般是后缀为-source的内核  
+这种内核事实上只是源码包  
+需要自行配置编译安装  
+以xanmod-source内核为例  
+```
+#列出内核列表并选择  
+eselect kernel list  
+
+#假设xanmod-source内核为2号  
+eselect kernel set 2  
+
+#进入内核目录  
+cd /usr/src/  
+
+#查看目录  
+ls  
+
+#进入除*linux*你所安装内核的文件夹  
+cd xanmod-kernel  
+ls  
+
+#里面通常会有一个**config**文件夹,里面包含的文件通常为通用内核配置  
+#假设**config**文件夹下的配置文件为*config1*  
+cd config  
+
+#复制通用配置到*linux*目录下  
+cp config1 /usr/src/linux/.config  
+
+#编辑配置文件  
+make menuconfig  
+
+#编译内核（$nproc为你的cpu线程数）  
+make -j$(nproc)  
+
+#编译内核模块  
+make modules_install  
+make install  
+
+#更新引导  
+grub-mkconfig -o /boot/grub/grub.cfg  
+```
+
+
+## 关于游戏  
+gentoo linux玩游戏是很方便的  
+
+
+### 关于Steam  
+参考https://wiki.gentoo.org/wiki/Steam  
+
+### 关于Lutris  
+lutris是一个开源的游戏启动器，可以非常便捷的管理你的游戏，可以调用wine  
+安装lutris之前我们需要在*/etc/portage/package.use/lutris*下写入  
+```
+#Lutris multilib dependencies  
+media-libs/vulkan-loader abi_x86_32  
+media-libs/vulkan-layers abi_x86_32  
+media-libs/freetype abi_x86_32  
+media-libs/libpng abi_x86_32  
+net-libs/gnutls abi_x86_32  
+media-libs/libsdl2 abi_x86_32  
+```
+然后安装  
+```
+emerge --ask games-util/lutris
+```
+
+### 关于Minecraft  
+mc的启动器可选择的非常多，这里我使用的是prime launcher（https://prismlauncher.org/）  
+一个开源的mc启动器，界面美观简洁，更棒的是gentoo官方repository里收留了这个启动器  
+但在我们正式安装之前需要安装java  
+```
+#安装java
+emerge --ask dev-java/openjdk-jre  
+
+#安装启动器  
+emerge --ask primelauncher  
+```
+
+
+## 字体  
+gentoo基础系统是不会预装有带有太多字体的  
+所以需要我们手动安装常用的字体  
+这里有我个人推荐安装的字体  
+
+#中文  
+- media-fonts/noto-cjk：Google的中日韩字符，支持简繁体，字体风格多样（包括粗体、斜体变体）  
+- media-fonts/wqy-microhei：文泉驿微米黑  
+- media-fonts/wqy-zenhei：文泉驿正黑字体，覆盖简繁中文字体，适合正文和显示，支持 UTF-8  
+- media-fonts/source-han-sans：Adobe 思源黑体，高质量开源字体  
+- media-fonts/arphicfonts：文鼎字体，包含宋体、黑体等经典中文字体，支持中文编码  
+
+#其他语言
+- media-fonts/corefonts：微软核心字体，包括 Arial、Times New Roman、Comic Sans 等，含斜体变体  
+- media-fonts/dejavu：DejaVu 字体，扩展自 Vera 字体，支持多种语言，包含 Sans、Serif 和 Mono 的斜体变体  
+- media-fonts/freefont：GNU FreeFont，包含 FreeSerif 和 FreeScript，适合花哨排版  
+- media-fonts/noto：Google的其他语言字体包，包括藏文、泰文、蒙古文、彝文等目标是覆盖所有 Unicode 字符（“No Tofu”，避免显示方框字符）  
+- media-fonts/unifont：GNU Unifont，覆盖几乎所有 Unicode 字符，适合需要广泛字符支持的场景  
+- media-fonts/sil-padauk：支持缅甸文，也适用于部分东南亚小众语言  
