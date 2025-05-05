@@ -4,7 +4,8 @@
 2. [[#软件包查找工具]]  
 3. [[#关于内核]]  
 4. [[#关于游戏]]  
-5. [[#字体]]
+5. [[#字体]]  
+6. [[#关于音频管理]]  
 
 
 ## 浏览器  
@@ -17,8 +18,8 @@ sudo emerge --ask firefox
 #或者  
 sudo emerge --ask google-chrome  
 ```
-我个人不推荐用edge（有很多bug）  
-也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久,~~铸币博主上次编译七小时~~  
+> 我个人不推荐用edge（有很多bug）  
+> 也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久,~~铸币博主上次编译七小时~~  
 
 
 ## 软件包查找工具  
@@ -126,19 +127,20 @@ media-libs/libsdl2 abi_x86_32
 ```
 然后安装  
 ```
-emerge --ask games-util/lutris
+emerge --ask games-util/lutris  
 ```
+参考：https://wiki.gentoo.org/wiki/Lutris  
 
 ### 关于Minecraft  
-mc的启动器可选择的非常多，这里我使用的是prime launcher（https://prismlauncher.org/）  
+mc的启动器可选择的非常多，这里我使用的是[prime launcher](https://prismlauncher.org/)  
 一个开源的mc启动器，界面美观简洁，更棒的是gentoo官方repository里收留了这个启动器  
 但在我们正式安装之前需要安装java  
 ```
 #安装java
-emerge --ask dev-java/openjdk-jre  
+emerge --ask dev-java/openjdk-bin  
 
 #安装启动器  
-emerge --ask primelauncher  
+emerge --ask games-action/prismlauncher  
 ```
 
 
@@ -205,3 +207,35 @@ nvim ~/.config/fontconfig/fonts.conf
 ```
 fc-cache -fv  
 ```
+
+## 关于音频管理  
+现在一般都推荐用PipeWire吧  
+在安装PipeWire之前，很重要的一件事就是开启所需的USE  
+```
+media-video/pipewire pipewire-alsa sound-server ffmpeg  
+```
+关于USE请参考[PipeWire Gentoo wiki](https://wiki.gentoo.org/wiki/PipeWire)  
+```
+#安装PipeWire  
+emerge --ask media-video/pipewire  
+
+#安装WirePlumber  
+emerge --ask media-video/wireplumber  
+```
+> WirePlumber是PipeWire的关键组件，拥有重要的作用  
+记得将用户加入pipewire组  
+```
+usermod -aG pipewire BAKA  
+```
+安装RTKit工具  
+```
+emerge --ask sys-auth/rtkit  
+```
+> RTKit工具被PipeWire依赖来确保音频的低延迟处理  
+然后启用服务(这里是在非root权限下运行)  
+```
+systemctl --user enable --now pipewire-pulse.socket wireplumber.service  
+
+systemctl --user enable --now pipewire.service  
+```
+参考：https://wiki.gentoo.org/wiki/PipeWire  
