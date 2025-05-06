@@ -21,6 +21,21 @@ sudo emerge --ask google-chrome
 > 我个人不推荐用edge（有很多bug）  
 > 也不推荐chrome的开源版*www-client/chromium*因为需要编译非常非常久,~~铸币博主上次编译七小时~~  
 
+接下来要做的就是将你想的浏览器设置为默认浏览器（如果你安装了多个浏览器）  
+例如我要将Firefox设置为默认浏览器  
+检查/usr/share/applications/  
+例如FireFox的运行桌面快捷方式叫*firefox-esr.desktop*而不是firefox.desktop  
+所以需要检查一遍你想要设置的浏览器的快捷方式  
+执行以下命令将 Firefox 设置为默认浏览器：  
+```
+xdg-settings set default-web-browser firefox-esr.desktop  
+```
+验证是否成功：  
+```
+xdg-settings get default-web-browser  
+```
+输出*firefox-esr.desktop*为成功  
+
 
 ## 软件包查找工具  
 *app-portage/eix*是gentoo linux使用必备工具之一  
