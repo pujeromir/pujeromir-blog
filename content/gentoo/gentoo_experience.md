@@ -1,4 +1,5 @@
-# 这里有一些使用gentoo linux的使用体验  
+# 这里有一些使用gentoo linux的使用体验和软件推荐  
+这里是[gentoo官方给的推荐软件](https://wiki.gentoo.org/wiki/Recommended_applications)  
 
 1. [[#浏览器]]  
 2. [[#软件包查找工具]]  
@@ -36,6 +37,7 @@ xdg-settings get default-web-browser
 ```
 输出*firefox-esr.desktop*为成功  
 
+---
 
 ## 软件包查找工具  
 *app-portage/eix*是gentoo linux使用必备工具之一  
@@ -54,6 +56,7 @@ eix mpv
 此外还有一个专门用来查询的网站，甚至可以查看下载某软件包的ebuild  
 [Gentoo Portage Overlay](https://gpo.zugaina.org)  
 
+---
 
 ## 关于内核
 
@@ -120,6 +123,7 @@ make install
 grub-mkconfig -o /boot/grub/grub.cfg  
 ```
 
+---
 
 ## 关于游戏  
 gentoo linux玩游戏是很方便的  
@@ -158,6 +162,7 @@ emerge --ask dev-java/openjdk-bin
 emerge --ask games-action/prismlauncher  
 ```
 
+---
 
 ## 字体  
 gentoo基础系统是不会预装有带有太多字体的  
@@ -223,6 +228,8 @@ nvim ~/.config/fontconfig/fonts.conf
 fc-cache -fv  
 ```
 
+---
+
 ## 关于音频管理  
 现在一般都推荐用PipeWire吧  
 在安装PipeWire之前，很重要的一件事就是开启所需的USE  
@@ -252,5 +259,10 @@ emerge --ask sys-auth/rtkit
 systemctl --user enable --now pipewire-pulse.socket wireplumber.service  
 
 systemctl --user enable --now pipewire.service  
+```
+最后有一个工具可能非常有用  
+pavucontrol是一个图形化的音频设备和音量控制软件，兼容PipeWire  
+```
+sudo emerge --ask media-sound/pavucontrol  
 ```
 参考：https://wiki.gentoo.org/wiki/PipeWire  

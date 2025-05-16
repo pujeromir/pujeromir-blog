@@ -233,6 +233,22 @@ emerge --ask net-misc/networkmanager
 systemctl enable NetworkManager  
 ```
 
+### 配置时间同步  
+通常使用的一个工具是chrony  
+```
+#安装
+emerge --ask net-misc/chrony  
+```
+启用rtconutc假设硬件时钟储存UTC时间  
+我们需要在*/etc/chrony/chrony.conf*下写入  
+```
+rtconutc  
+```
+启用服务  
+```
+systemctl enable chronyd.service  
+```
+
 ### 设置用户  
 1. 首先为root用户设置密码  
 ```
@@ -245,7 +261,7 @@ useradd -m -G users,usb,wheel,audio,video -s /bin/bash BAKA
 #这里会提示Creating mailbox file: No such file or directory，但不需要在意  
 
 #设置用户密码  
-passwd username 
+passwd BAKA 
 ```
 
 3. 设置用户权限  
